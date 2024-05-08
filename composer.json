@@ -1,20 +1,20 @@
 {
-    "name": "cuonggt/laravel-dibi",
+    "name": "giunashvili/laravel-dibi",
     "description": "An elegant GUI database management tool for your Laravel applications.",
     "keywords": [
         "laravel",
         "dibi"
     ],
-    "homepage": "https://github.com/cuonggt/laravel-dibi",
+    "homepage": "https://github.com/giunashvili/laravel-dibi",
     "license": "MIT",
-    "support": {
-        "issues": "https://github.com/cuonggt/laravel-dibi/issues",
-        "source": "https://github.com/cuonggt/laravel-dibi"
-    },
     "authors": [
         {
             "name": "Cuong Giang",
             "email": "thaicuong.giang@gmail.com"
+        },
+        {
+            "name": "Giorgi Giunashvili",
+            "email": "hackramatan@gmail.com"
         }
     ],
     "require": {
