@@ -20,4 +20,9 @@ class SelectConnectionController extends Controller
 
         Cache::put('dibiConnection', $request->connection);
     }
+
+    public function selectDatabase(Request $request)
+    {
+        Cache::put('dibiDatabase', $request->database);
+    }
 }

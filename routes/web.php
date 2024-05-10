@@ -8,6 +8,7 @@ Route::namespace('Cuonggt\Dibi\Http\Controllers')
     ->middleware(config('dibi.middleware', []))
     ->group(function () {
         Route::post('/api/select-connection', 'SelectConnectionController@select');
+        Route::post('/api/select-database', 'SelectConnectionController@selectDatabase');
         Route::post('/api/sql-query', 'SqlQueryController@run');
         Route::post('/api/tables/{table}/rows/filter', 'TableRowsController@filter');
 

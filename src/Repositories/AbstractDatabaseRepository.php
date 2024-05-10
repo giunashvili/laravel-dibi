@@ -2,8 +2,10 @@
 
 namespace Cuonggt\Dibi\Repositories;
 
+use Cache;
 use Cuonggt\Dibi\Contracts\DatabaseRepository;
 use Cuonggt\Dibi\InformationSchema;
+use Illuminate\Database\Connection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
@@ -25,6 +27,7 @@ abstract class AbstractDatabaseRepository implements DatabaseRepository
     public function __construct($db)
     {
         $this->db = $db;
+        Connection::useDatabase($this->getName());
     }
 
     /**
@@ -32,7 +35,7 @@ abstract class AbstractDatabaseRepository implements DatabaseRepository
      */
     public function getName()
     {
-        return $this->db->getDatabaseName();
+        return Cache::get('dibiDatabase', $this->db->getDatabaseName());
     }
 
     /**

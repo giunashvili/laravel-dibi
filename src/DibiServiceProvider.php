@@ -2,6 +2,8 @@
 
 namespace Cuonggt\Dibi;
 
+use DB;
+use Illuminate\Database\Connection;
 use Illuminate\Support\ServiceProvider;
 
 class DibiServiceProvider extends ServiceProvider
@@ -30,6 +32,13 @@ class DibiServiceProvider extends ServiceProvider
                 __DIR__.'/../stubs/DibiServiceProvider.stub' => app_path('Providers/DibiServiceProvider.php'),
             ], 'dibi-provider');
         }
+
+        Connection::macro('useDatabase', function (string $database) {
+            $pdo = DB::connection()->getPdo();
+            $pdo->exec("USE `$database`");
+            DB::connection()->setDatabaseName($database);
+        });
+
     }
 
     /**

@@ -1,5 +1,20 @@
 <template>
     <div class="flex-1 flex flex-col overflow-y-auto bg-gray-800">
+        <div class="px-2">
+            <select
+                class="py-2 w-full border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                @change="selectDatabase($event.target.value)"
+            >
+                <option 
+                    v-for="db in databases"
+                    :key="db"
+                    :selected="db == database"
+                    :value="db"
+                >
+                    {{ db }}
+                </option>
+            </select>
+        </div>
         <div class="p-2 sticky top-0">
             <x-input
                 v-model="keyword"
@@ -48,6 +63,8 @@ export default {
     data() {
         return {
             keyword: '',
+            databases: Dibi.allDatabases,
+            database: Dibi.database,
         };
     },
     computed: {
@@ -56,6 +73,15 @@ export default {
                 return Dibi.informationSchema.tables;
             }
             return Dibi.informationSchema.tables.filter((table) => table.tableName.includes(this.keyword));
+        },
+    },
+    methods: {
+        async selectDatabase(database) {
+            await axios.post(`${Dibi.path}/api/select-database`, {
+                database,
+            });
+
+            window.location.href = Dibi.path;
         },
     },
 };

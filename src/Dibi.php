@@ -12,7 +12,7 @@ class Dibi
     /**
      * The callback that should be used to authenticate Horizon users.
      *
-     * @var \Closure
+     * @var Closure
      */
     public static $authUsing;
 
@@ -33,7 +33,7 @@ class Dibi
     /**
      * Database Repository.
      *
-     * @var \Cuonggt\Dibi\Contracts\DatabaseRepository
+     * @var Contracts\DatabaseRepository
      */
     public static $databaseRepository;
 
@@ -85,6 +85,19 @@ class Dibi
     }
 
     /**
+     * Return all databases in current connection.
+     *
+     * @return array
+     */
+    public static function allDatabaseNames()
+    {
+        $rawDatabases = DB::connection(Dibi::currentDatabaseConnection())->select('SHOW DATABASES');
+        $DBs = collect($rawDatabases)->map(fn ($db) => $db->Database)->toArray();
+
+        return $DBs;
+    }
+
+    /**
      * Get the list of available database connections.
      *
      * @return array
@@ -130,7 +143,7 @@ class Dibi
     /**
      * Get the database repository.
      *
-     * @return \Cuonggt\Dibi\Contracts\DatabaseRepository
+     * @return Contracts\DatabaseRepository
      */
     public static function databaseRepository()
     {

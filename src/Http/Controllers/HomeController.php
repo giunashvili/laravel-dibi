@@ -19,6 +19,7 @@ class HomeController extends Controller
                 'databaseConnections' => Dibi::databaseConnections(),
                 'currentDatabaseConnection' => Dibi::currentDatabaseConnection(),
                 'database' => Dibi::databaseRepository()->getName(),
+                'allDatabases' => Dibi::allDatabaseNames(),
                 'informationSchema' => Dibi::databaseRepository()->informationSchema(),
             ]),
         ]);
